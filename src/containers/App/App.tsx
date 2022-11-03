@@ -54,8 +54,8 @@ Contraseña
         .test("test-name", "El nombre debe ser unicamente letras", (value) => {
           return /^[a-zA-Z]+$/.test(value);
         }),
-      tel: Yup.string()
-        .test("test-phone", "Numero no valido", (value) => {
+      tel: Yup.number()
+        /* .test("test-phone", "Numero no valido", (value) => {
           if (value.length === 10) {
             return true;
           }
@@ -68,7 +68,7 @@ Contraseña
           (value) => {
             return /^[0-9]+$/.test(value);
           }
-        )
+        ) */
         .required("El teléfono es obligatorio"),
       birthDate: Yup.date().required("La fecha de nacimiento es obligatoria"),
       documentType: Yup.string().required(
