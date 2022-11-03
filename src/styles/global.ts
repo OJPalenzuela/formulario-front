@@ -18,6 +18,10 @@ const GlobalStyle = createGlobalStyle`
   -webkit-text-size-adjust: 100%;
 }
 
+.error {
+    color: #ED4337;
+  }
+
 #root {
   width: 100%;
   height: 100%;

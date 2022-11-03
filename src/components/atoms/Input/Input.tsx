@@ -55,10 +55,6 @@ const InputContainer = styled.div`
       color: #ffff;
     }
   }
-
-  .error {
-    color: red;
-  }
 `;
 
 export default Input;

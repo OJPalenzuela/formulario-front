@@ -23,13 +23,12 @@ const useStyles = makeStyles({
   // add other styling here...
 }); */
 
-const AutosuggestInput = ({ value, onChange, onBlur, setField }) => {
-  const [data, setData] = useState<string[]>([]);
+const AutosuggestInput = ({ value, onChange, onBlur, setField, data }) => {
   const [cities, setCities] = useState<string[]>(data);
   const [selectCity, setSelectCity] = useState({
     city: "",
   });
- /*  const theme = useStyles(); */
+  /*  const theme = useStyles(); */
 
   const onSuggestionsFetchRequested = ({ value }) => {
     setCities(filtrarPresidentes(value));
@@ -87,16 +86,6 @@ const AutosuggestInput = ({ value, onChange, onBlur, setField }) => {
       onSelectCity(presidente);
     }
   };
-
-  useEffect(() => {
-    fetch(
-      "https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data.map((city: any) => city.ciudades).flat());
-      });
-  }, []);
 
   const inputProps = {
     placeholder: "Elige una ciudad",

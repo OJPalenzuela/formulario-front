@@ -11,6 +11,7 @@ import Date from "../../components/atoms/Date/Date";
 import SelectMui from "../../components/atoms/Select/Select";
 
 function App() {
+  const [data, setData] = useState<string[]>([]);
   /**
    * Nombre
 Apellidos
@@ -21,6 +22,17 @@ Tipo de documento
 Numero documento
 Contraseña
    */
+
+  useEffect(() => {
+    fetch(
+      "https://raw.githubusercontent.com/marcovega/colombia-json/master/colombia.min.json"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data.map((city: any) => city.ciudades).flat());
+      });
+  }, []);
+
   const formik = useFormik({
     // Declaración de los campos del formulario
     initialValues: {
@@ -53,6 +65,9 @@ Contraseña
         .required("La ciudad es obligatoria")
         .test("test-name", "El nombre debe ser unicamente letras", (value) => {
           return /^[a-zA-Z]+$/.test(value);
+        })
+        .test("test-name", "La ciudad no existe", (value) => {
+          return data.includes(value);
         }),
       tel: Yup.number()
         /* .test("test-phone", "Numero no valido", (value) => {
@@ -133,9 +148,10 @@ Contraseña
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               setField={formik.setFieldValue}
+              data={data}
             />
-            {formik.touched.city && formik.errors.city && (
-              <span className="error">Error</span>
+            {formik.touched["city"] && formik.errors["city"] && (
+              <span className="error">{`${formik?.errors["city"]}`}</span>
             )}
           </div>
           <Input
