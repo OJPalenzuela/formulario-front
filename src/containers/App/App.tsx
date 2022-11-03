@@ -98,13 +98,20 @@ Contraseña
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
+        height: "100%",
         width: "100%",
       }}
     >
       <FormContainer>
         <h1>Form</h1>
-        <form onSubmit={formik.handleSubmit}>
+        <form
+          onSubmit={formik.handleSubmit}
+          style={{
+            width: "60%",
+            minWidth: "300px",
+            maxWidth: "600px",
+          }}
+        >
           <Input
             title="Nombre"
             name="name"
